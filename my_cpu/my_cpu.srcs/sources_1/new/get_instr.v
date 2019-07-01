@@ -14,7 +14,7 @@ module get_instr(
     );
     
 reg[`INSTRLENGTH]  instr_mem[0:`INSTR_MEM_NUM-1];
-        initial $readmemh("/home/qishen-zhen/Documents/inst_rom.data",instr_mem);
+        initial $readmemh("/home/forever/works/inst_rom.data",instr_mem);
         
         always @ (*) begin
             if (reset == 1'b1) begin
