@@ -53,7 +53,6 @@ module decode_exe(
     input [`DATALENGTH]SignImmD,
     
     input [`PCSIZE] PCPlus8D,          // **added for PC
-    input [`PCSIZE] PCD,    //added for debug
     
     // output
     output reg RegWriteE,
@@ -80,8 +79,7 @@ module decode_exe(
     output reg [`R_SIZE]RdE,
     
     output reg [`DATALENGTH]SignImmE,
-    output reg[`OP_SIZE] opcodeE,
-    output reg[`PCSIZE] PCE    //added for debug
+    output reg[`OP_SIZE] opcodeE
     );
     
     always@(posedge clock)begin
@@ -107,7 +105,6 @@ module decode_exe(
             PCtoRegE <= 1'b0;
             PCPlus8E <= `ZEROWORD;
             opcodeE <= 6'b000000;
-            PCE<=`ZEROWORD;
         end
         else begin
             RegWriteE <= RegWriteD;
@@ -131,7 +128,6 @@ module decode_exe(
             PCtoRegE <= PCtoRegD;
             PCPlus8E <= PCPlus8D;
             opcodeE <= opcodeD;
-            PCE<=PCD;
      
         end
     end

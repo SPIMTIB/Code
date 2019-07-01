@@ -46,7 +46,6 @@ module accessMem_writeback(
     //input [`DATALENGTH] write_lo_dataM,
     
     input [`PCSIZE] PCPlus8M,  // ** added for PC
-    input [`PCSIZE] PCM,    //added for debug
     // output
     output reg RegWriteW,
     output reg MemtoRegW,
@@ -66,10 +65,7 @@ module accessMem_writeback(
     
     //output reg[`DATALENGTH] write_hi_dataW,
     //output reg[`DATALENGTH] write_lo_dataW
-    output reg[`DATALENGTH] HiloDataW,
-    output reg[`PCSIZE] PCW,    //added for debug
-    output reg[3:0] debug_wb_rf_wen,    //added for debug
-    output reg[`R_SIZE] debug_wb_rf_wnum    //added for debug
+    output reg[`DATALENGTH] HiloDataW
     );     
     
     always@(posedge clock)begin
@@ -92,9 +88,6 @@ module accessMem_writeback(
             PCtoRegW <= 1'b0;
             PCPlus8W <= `ZEROWORD;
             HiloDataW <= `ZEROWORD;
-            PCW<=`ZEROWORD;
-            debug_wb_rf_wnum<='b00000;
-            debug_wb_rf_wen<='b0000;
         end
         else begin
             RegWriteW <= RegWriteM;
@@ -115,9 +108,6 @@ module accessMem_writeback(
             PCtoRegW <= PCtoRegM;
             PCPlus8W <= PCPlus8M;
             HiloDataW <= HiloDataM;
-            PCW<=PCM;
-            debug_wb_rf_wnum<=WriteRegM;
-            debug_wb_rf_wen<={RegWriteM,RegWriteM,RegWriteM,RegWriteM};
         end
     end
 endmodule

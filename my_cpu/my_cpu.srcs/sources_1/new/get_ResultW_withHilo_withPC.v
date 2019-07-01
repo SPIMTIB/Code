@@ -31,8 +31,7 @@ module get_ResultW_withHilo_withPC(
     input [`DATALENGTH] ResultW_withHilo,
     input [`PCSIZE] PCPlus8W,
     
-    output reg[`DATALENGTH] ResultW_withHilo_withPC,
-    output reg[`DATALENGTH] debug_wb_rf_wdata    //added for debug, equal to ResultW_withHilo_withPC
+    output reg[`DATALENGTH] ResultW_withHilo_withPC
     );
     
     always@(*)begin
@@ -46,9 +45,4 @@ module get_ResultW_withHilo_withPC(
             end
         end
     end
-    
-    always@(*)begin
-        debug_wb_rf_wdata<=ResultW_withHilo_withPC;
-    end
-    
 endmodule

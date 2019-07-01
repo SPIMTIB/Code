@@ -23,24 +23,13 @@
 module mycpu(
     input wire clock,
     input wire reset,
-    input wire [5:0] int,
     
-    output wire inst_sram_en,
-    output wire [3:0] inst_sram_wen,
-    output wire [31:0] inst_sram_addr,
-    output wire [31:0] inst_sram_wdata,
-    input wire [31:0] inst_sram_rdata,
-    
-    output wire data_sram_en,
-    output wire [3:0] data_sram_wen,
-    output wire [31:0] data_sram_addr,
-    output wire [31:0] data_sram_wdata,
-    input wire [31:0] data_sram_rdata,
-    
-    output wire [31:0] debug_wb_pc,
-    output wire [3:0] debug_wb_rf_wen,
-    output wire [4:0] debug_wb_rf_wnum,
-    output wire [31:0] debug_wb_rf_wdata
+    input wire[32:0]               ram_data_i,
+    output wire[32:0]              ram_addr_o,
+    output wire[32:0]              ram_data_o,
+    output wire                    ram_we_o,
+    output wire[3:0]               ram_sel_o,
+    output wire                    ram_ce_o
     
     );
     
@@ -53,7 +42,6 @@ module mycpu(
     
     wire StallD;
     wire PCSrcD;
-    wire [`PCSIZE] PCD;
     wire [`INSTRSIZE]InstrD;
     wire [`PCSIZE] PCPlus4D;
     wire [`PCSIZE] PCPlus8D;
@@ -129,7 +117,6 @@ module mycpu(
     wire [`PCSIZE] PCPlus8E;   // added for PC
     wire [`R_SIZE] WriteRegE;       //
     wire [`OP_SIZE] opcodeE;
-    wire [`PCSIZE] PCE; //added for debug
     
     wire[1:0] ForwardAE;
     wire[`DATALENGTH] ResultW;
@@ -152,7 +139,6 @@ module mycpu(
     wire HilotoRegM;
     wire PCtoRegM;      // **added for PC
     wire [`PCSIZE] PCPlus8M;   // added for PC
-    wire [`PCSIZE] PCM; //added for debug
    // wire [`DATALENGTH]ALUOutM;
     wire [`DATALENGTH]WriteDataM;
     wire [`R_SIZE] WriteRegM;
@@ -211,10 +197,12 @@ module mycpu(
     // PC_ALU
     PC_ALU PC_ALU0(.PCF(PCF),.PCPlus4F(PCPlus4F));
     // get_instr
-    get_instr get_instr0(.clock(clock),.reset(reset),.instr_addr(PCF),.instr_from_ram(inst_sram_rdata),.InstrI(InstrI),.inst_sram_en(inst_sram_en),.inst_sram_wen(inst_sram_wen),.inst_sram_addr(inst_sram_addr),.inst_sram_wdata(inst_sram_wdata));    /* get instructment part is over */
+    get_instr get_instr0(.clock(clock),.reset(reset),.instr_addr(PCF),.InstrI(InstrI));
+    /* get instructment part is over */
     
     // instr_decode
-    instr_decode instr_decode0(.clock(clock),.reset(reset),.StallD(StallD),.PCSrcD(PCSrcD),.InstrI(InstrI),.PCPlus4F(PCPlus4F),.PCI(PCF),.InstrD(InstrD),.PCPlus4D(PCPlus4D),.PCD(PCD));    
+    instr_decode instr_decode0(.clock(clock),.reset(reset),.StallD(StallD),.PCSrcD(PCSrcD),.InstrI(InstrI),.PCPlus4F(PCPlus4F),.InstrD(InstrD),.PCPlus4D(PCPlus4D));
+    
     /* below is part2 : decode*/
     //decode 
     decode decode0(.clock(clock),.reset(reset),.InstrD(InstrD),.instrIndex(instrIndex),.rs(rs),.rt(rt),.rd(rd),.im(im),.opcode(opcode),.funccode(funccode));
@@ -294,7 +282,6 @@ module mycpu(
     .RdD(RdD),
     .SignImmD(SignImmD),
     .PCPlus8D(PCPlus8D),
-    .PCD(PCD),
     .opcodeD(opcode_out_opcodeD),
     .RegWriteE(RegWriteE),
     .MemtoRegE(MemtoRegE),
@@ -316,8 +303,7 @@ module mycpu(
     .RtE(RtE),
     .RdE(RdE),
     .SignImmE(SignImmE),
-    .opcodeE(opcodeE),
-    .PCE(PCE)
+    .opcodeE(opcodeE)
     );
     
     /* below is part3 : exe*/
@@ -367,7 +353,6 @@ module mycpu(
     .write_hi_dataE(write_hi_dataE),
     .write_lo_dataE(write_lo_dataE),
     .PCPlus8E(PCPlus8E),
-    .PCE(PCE),
     .opcodeE(opcodeE),
     .RegWriteM(RegWriteM),
     .MemtoRegM(MemtoRegM),
@@ -382,7 +367,6 @@ module mycpu(
     .HilotoRegM(HilotoRegM),
     .PCtoRegM(PCtoRegM),
     .PCPlus8M(PCPlus8M),
-    .PCM(PCM),
     .write_hi_dataM(write_hi_dataM),
     .write_lo_dataM(write_lo_dataM),
     .opcodeM(opcodeM)
@@ -420,9 +404,9 @@ module mycpu(
     wire [`DATALENGTH] HiloDataW;
     accessMem_writeback accessMem_writeback0(.clock(clock),.reset(reset),.RegWriteM(RegWriteM),.MemtoRegM(MemtoRegM),.HilotoRegM(HilotoRegM),
     .PCtoRegM(PCtoRegM),.ReadDataM(ReadDataM),.ALUOutM(ALUOutM),.WriteRegM(WriteRegM),.HiloDataM(hilo_data_out),
-    .PCPlus8M(PCPlus8M),.PCM(PCM),.RegWriteW(RegWriteW),.MemtoRegW(MemtoRegW),.HilotoRegW(HilotoRegW),
+    .PCPlus8M(PCPlus8M),.RegWriteW(RegWriteW),.MemtoRegW(MemtoRegW),.HilotoRegW(HilotoRegW),
     .PCtoRegW(PCtoRegW),.PCPlus8W(PCPlus8W),.ReadDataW(ReadDataW),.ALUOutW(ALUOutW),.WriteRegW(WriteRegW),
-    .HiloDataW(HiloDataW),.PCW(debug_wb_pc),.debug_wb_rf_wen(debug_wb_rf_wen),.debug_wb_rf_wnum(debug_wb_rf_wnum));
+    .HiloDataW(HiloDataW));
     /* below is part5 : writeback*/
 
    
@@ -431,7 +415,7 @@ module mycpu(
     // get_ResultW_withHilo
     get_ResultW_withHilo get_ResultW_withHilo0(.clock(clock),.reset(reset),.HilotoRegW(HilotoRegW),.ResultW(ResultW),.Hilodata(HiloDataW),.ResultW_withHilo(ResultW_withHilo));
     // get_ResultW_withHilo_withPC
-    get_ResultW_withHilo_withPC get_ResultW_withHilo_withPC0(.clock(clock),.reset(reset),.PCtoRegW(PCtoRegW),.ResultW_withHilo(ResultW_withHilo),.PCPlus8W(PCPlus8W),.ResultW_withHilo_withPC(ResultW_withHilo_withPC),.debug_wb_rf_wdata(debug_wb_rf_wdata));
+    get_ResultW_withHilo_withPC get_ResultW_withHilo_withPC0(.clock(clock),.reset(reset),.PCtoRegW(PCtoRegW),.ResultW_withHilo(ResultW_withHilo),.PCPlus8W(PCPlus8W),.ResultW_withHilo_withPC(ResultW_withHilo_withPC));
     
     /* writeback part is over*/
     
