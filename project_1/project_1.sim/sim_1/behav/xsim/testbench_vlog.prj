@@ -1,0 +1,46 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../project_1.srcs/sources_1/new" \
+"../../../../project_1.srcs/sources_1/new/M_E_databack.v" \
+"../../../../project_1.srcs/sources_1/new/PC_ALU.v" \
+"../../../../project_1.srcs/sources_1/new/SrcAE_SrcBE_ALU.v" \
+"../../../../project_1.srcs/sources_1/new/accessMem_writeback.v" \
+"../../../../project_1.srcs/sources_1/new/access_mem.v" \
+"../../../../project_1.srcs/sources_1/new/control_unit.v" \
+"../../../../project_1.srcs/sources_1/new/data_ram.v" \
+"../../../../project_1.srcs/sources_1/new/decode.v" \
+"../../../../project_1.srcs/sources_1/new/decode_exe.v" \
+"../../../../project_1.srcs/sources_1/new/exe_accessMem.v" \
+"../../../../project_1.srcs/sources_1/new/getEqualD.v" \
+"../../../../project_1.srcs/sources_1/new/getRdD.v" \
+"../../../../project_1.srcs/sources_1/new/get_J_PCBranchD.v" \
+"../../../../project_1.srcs/sources_1/new/get_PCBranchD.v" \
+"../../../../project_1.srcs/sources_1/new/get_PCBranchD_final.v" \
+"../../../../project_1.srcs/sources_1/new/get_PCPLus8.v" \
+"../../../../project_1.srcs/sources_1/new/get_PCSrcD.v" \
+"../../../../project_1.srcs/sources_1/new/get_ResultW.v" \
+"../../../../project_1.srcs/sources_1/new/get_ResultW_withHilo.v" \
+"../../../../project_1.srcs/sources_1/new/get_ResultW_withHilo_withPC.v" \
+"../../../../project_1.srcs/sources_1/new/get_ShiftSrc.v" \
+"../../../../project_1.srcs/sources_1/new/get_SrcAE.v" \
+"../../../../project_1.srcs/sources_1/new/get_SrcBE.v" \
+"../../../../project_1.srcs/sources_1/new/get_WriteDataE.v" \
+"../../../../project_1.srcs/sources_1/new/get_WriteRegE.v" \
+"../../../../project_1.srcs/sources_1/new/get_instr.v" \
+"../../../../project_1.srcs/sources_1/new/get_pc.v" \
+"../../../../project_1.srcs/sources_1/new/hazard_unit.v" \
+"../../../../project_1.srcs/sources_1/new/hilo.v" \
+"../../../../project_1.srcs/sources_1/new/instr_decode.v" \
+"../../../../project_1.srcs/sources_1/new/mips.v" \
+"../../../../project_1.srcs/sources_1/new/mips_sopc.v" \
+"../../../../project_1.srcs/sources_1/new/mul.v" \
+"../../../../project_1.srcs/sources_1/new/mul_div_choose.v" \
+"../../../../project_1.srcs/sources_1/new/regfile.v" \
+"../../../../project_1.srcs/sources_1/new/shift_unit.v" \
+"../../../../project_1.srcs/sources_1/new/sig_extend.v" \
+"../../../../project_1.srcs/sim_1/new/testbench.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

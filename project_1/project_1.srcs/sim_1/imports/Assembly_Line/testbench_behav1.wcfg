@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="169000001fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="162"></NameColumnWidth>
+      <ValueColumnWidth column_width="96"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="33" />
+   <wvobject type="logic" fp_name="/testbench/CLOCK_50">
+      <obj_property name="ElementShortName">CLOCK_50</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_50</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_instr0/InstrI">
+      <obj_property name="ElementShortName">InstrI[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InstrI[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_instr0/instr_addr">
+      <obj_property name="ElementShortName">instr_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instr_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/hilo0/hi">
+      <obj_property name="ElementShortName">hi[31:0]</obj_property>
+      <obj_property name="ObjectShortName">hi[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/hilo0/lo">
+      <obj_property name="ElementShortName">lo[31:0]</obj_property>
+      <obj_property name="ObjectShortName">lo[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/ALUOutE">
+      <obj_property name="ElementShortName">ALUOutE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_J_PCBranchD0/J_PCBranchD">
+      <obj_property name="ElementShortName">J_PCBranchD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">J_PCBranchD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/get_pc0/StallF">
+      <obj_property name="ElementShortName">StallF</obj_property>
+      <obj_property name="ObjectShortName">StallF</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/hazard_unit0/lwstall">
+      <obj_property name="ElementShortName">lwstall</obj_property>
+      <obj_property name="ObjectShortName">lwstall</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/hazard_unit0/branchstall">
+      <obj_property name="ElementShortName">branchstall</obj_property>
+      <obj_property name="ObjectShortName">branchstall</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/get_PCSrcD0/PCSrcD">
+      <obj_property name="ElementShortName">PCSrcD</obj_property>
+      <obj_property name="ObjectShortName">PCSrcD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/get_PCSrcD0/EqualD">
+      <obj_property name="ElementShortName">EqualD</obj_property>
+      <obj_property name="ObjectShortName">EqualD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/result">
+      <obj_property name="ElementShortName">result</obj_property>
+      <obj_property name="ObjectShortName">result</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/get_PCSrcD0/BranchD">
+      <obj_property name="ElementShortName">BranchD</obj_property>
+      <obj_property name="ObjectShortName">BranchD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/EqualDControl">
+      <obj_property name="ElementShortName">EqualDControl[2:0]</obj_property>
+      <obj_property name="ObjectShortName">EqualDControl[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/ForwardAD">
+      <obj_property name="ElementShortName">ForwardAD</obj_property>
+      <obj_property name="ObjectShortName">ForwardAD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/getEqualD0/ForwardBD">
+      <obj_property name="ElementShortName">ForwardBD</obj_property>
+      <obj_property name="ObjectShortName">ForwardBD</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/A1">
+      <obj_property name="ElementShortName">A1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">A1[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/A2">
+      <obj_property name="ElementShortName">A2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">A2[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/RD1">
+      <obj_property name="ElementShortName">RD1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RD1[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/RD2">
+      <obj_property name="ElementShortName">RD2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RD2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/decode0/InstrD">
+      <obj_property name="ElementShortName">InstrD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InstrD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/WD3">
+      <obj_property name="ElementShortName">WD3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WD3[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/mips_sopc0/mips0/regfile0/RegWriteW">
+      <obj_property name="ElementShortName">RegWriteW</obj_property>
+      <obj_property name="ObjectShortName">RegWriteW</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/regfile0/A3">
+      <obj_property name="ElementShortName">A3[4:0]</obj_property>
+      <obj_property name="ObjectShortName">A3[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_pc0/PCBranchD">
+      <obj_property name="ElementShortName">PCBranchD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PCBranchD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_pc0/PCF">
+      <obj_property name="ElementShortName">PCF[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PCF[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_pc0/PCPlus4F">
+      <obj_property name="ElementShortName">PCPlus4F[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PCPlus4F[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_pc0/PCF">
+      <obj_property name="ElementShortName">PCF[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PCF[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_pc0/PC_">
+      <obj_property name="ElementShortName">PC_[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_[31:0]</obj_property>
+   </wvobject>
+</wave_config>
