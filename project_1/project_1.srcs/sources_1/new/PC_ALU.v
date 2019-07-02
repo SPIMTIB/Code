@@ -24,10 +24,11 @@ module PC_ALU(
     input reset,
 
     input [`PCSIZE]PCF,
-    output reg[`PCSIZE] PCPlus4F
+    output [`PCSIZE] PCPlus4F
     );
     
-    
+    assign PCPlus4F = (reset == `RESETABLE)?`ZEROWORD:PCF+4;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             PCPlus4F <= `ZEROWORD;
@@ -36,5 +37,5 @@ module PC_ALU(
         end
 
     end
-    
+    */
 endmodule

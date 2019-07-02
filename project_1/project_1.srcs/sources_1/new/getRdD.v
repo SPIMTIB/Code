@@ -31,9 +31,13 @@ module getRdD(
     input [`R_SIZE] rd,
     
     // output 
-    output reg[`R_SIZE] RdD
+    output [`R_SIZE] RdD
     );
     
+    assign RdD = (reset == `RESETABLE) ? 5'b00000 :
+                 (RdD_31_Control == 1'b1) ? 5'b11111 : 
+                 rd;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             RdD <= 5'b00000;
@@ -45,5 +49,5 @@ module getRdD(
             end
         end
     end
-    
+    */
 endmodule

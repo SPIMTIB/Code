@@ -36,14 +36,33 @@ module control_unit(
     output reg LoReadD,
     output reg HilotoRegD,
     
+    // is divide 
+    output reg[1:0] isDivD,     //sig div : 01 , unsig div : 10, not a div : 00 / 11
     
-    output wire[`OP_SIZE] opcode_out
+    // memory access control signal
+    output [3:0] MemCtrlD
+    // to be deleted
+   // output wire[`OP_SIZE] opcode_out
+   
     );
     
     // cal ALUControlD
-    assign opcode_out = opcode_in;
+    //assign opcode_out = opcode_in;
      
-    
+    assign MemCtrlD = (reset == 1'b1)?4'b0000:
+                     (opcode_in == `OP_LB)?`MEM_LB:
+                     (opcode_in == `OP_LBU)?`MEM_LBU:
+                     (opcode_in == `OP_LH)?`MEM_LH:
+                     (opcode_in == `OP_LHU)?`MEM_LHU:
+                     (opcode_in == `OP_LW)?`MEM_LW:
+                     (opcode_in == `OP_LWL)?`MEM_LWL:
+                     (opcode_in == `OP_LWR)?`MEM_LWR:
+                     (opcode_in == `OP_SB)?`MEM_SB:
+                     (opcode_in == `OP_SH)?`MEM_SH:
+                     (opcode_in == `OP_SW)?`MEM_SW:
+                     (opcode_in == `OP_SWL)?`MEM_SWL:
+                     (opcode_in == `OP_SWR)?`MEM_SWR:
+                     4'b0000;
     always @ (*) begin
         if(reset == 1'b0) begin
             case (opcode_in)
@@ -69,6 +88,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_ADDU:begin
                             RegWriteD <= 1'b1;
@@ -90,6 +110,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_SUB:begin
                             RegWriteD <= 1'b1;
@@ -111,6 +132,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_SUBU:begin
                             RegWriteD <= 1'b1;
@@ -132,6 +154,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_SLT:begin
                             RegWriteD <= 1'b1;
@@ -153,6 +176,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_SLTU:begin
                             RegWriteD <= 1'b1;
@@ -174,6 +198,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_MUL:begin
                             RegWriteD <= 1'b0;
@@ -195,6 +220,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_MULU:begin
                             RegWriteD <= 1'b0;
@@ -216,8 +242,10 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_DIV:begin
+                            isDivD <= 2'b01;
                             // tbd
                         end
                         `FUNC_DIVU:begin
@@ -241,6 +269,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b10;
                         end
                         `FUNC_MTHI:begin
                             RegWriteD <= 1'b0;
@@ -262,6 +291,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_MTLO:begin
                             RegWriteD <= 1'b0;
@@ -283,6 +313,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_MFHI:begin
                             RegWriteD <= 1'b1;
@@ -304,6 +335,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_MFLO:begin
                             RegWriteD <= 1'b1;
@@ -325,6 +357,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_JR:begin
                             RegWriteD <= 1'b0;
@@ -346,6 +379,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b1;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_JALR:begin
                             RegWriteD <= 1'b1;
@@ -367,6 +401,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b1;
+                            isDivD <= 2'b00;
                         end
 						//********************hjw************************//
 						`FUNC_AND:begin
@@ -389,6 +424,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
 						end
 						  
 						`FUNC_XOR:begin
@@ -411,6 +447,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
 						end
 						`FUNC_NOR:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -432,6 +469,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_OR:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -453,6 +491,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_SLL:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -474,6 +513,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_SLLV:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -495,6 +535,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_SRA:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -516,6 +557,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_SRAV:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -537,6 +579,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						`FUNC_SRL:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -558,6 +601,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `FUNC_SRLV:begin  //hjw
                             RegWriteD <= 1'b1;
@@ -579,6 +623,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
 						//********************hjw*************************//
                         default:begin
@@ -601,6 +646,7 @@ module control_unit(
                             RdD_31_Control <= 1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                    endcase
                 end
@@ -624,6 +670,7 @@ module control_unit(
                             HilotoRegD <=1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `RT_BGEZ:begin
                             RegWriteD <= 1'b0;
@@ -643,6 +690,7 @@ module control_unit(
                             HilotoRegD <=1'b0;
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `RT_BGEZAL:begin
                             RegWriteD <= 1'b1;
@@ -661,7 +709,7 @@ module control_unit(
                             RdD_31_Control <= 1'b1;
                             HilotoRegD <=1'b0;
                             J_Imi_ControlD <= 1'b0;
-                            J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                         `RT_BLTZAL:begin
                             RegWriteD <= 1'b1;
@@ -681,6 +729,7 @@ module control_unit(
                             HilotoRegD <=1'b0;  
                             J_Imi_ControlD <= 1'b0;
                             J_Rs_ControlD <= 1'b0;
+                            isDivD <= 2'b00;
                         end
                     endcase
                 end
@@ -702,6 +751,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_ADDIU:begin
                     RegWriteD <= 1'b1;
@@ -712,7 +762,7 @@ module control_unit(
                     RegDstD <= 1'b0;
                     BranchD <= 1'b0;
                     SigExtendSignalD <= 1'b01;       // 1 extend
-					ShiftSrcD <= 'b0;
+					ShiftSrcD <= 1'b0;
                     HiWriteD <= 1'b0;
                     LoWriteD <= 1'b0;
                     EqualDControl <= 3'b000;
@@ -721,6 +771,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
             end
                 `OP_ORI:begin
                     RegWriteD <= 1'b1;
@@ -740,6 +791,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_ANDI:begin
                     RegWriteD <= 1'b1;
@@ -759,6 +811,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0; 
+                    isDivD <= 2'b00;
                 end 
                 `OP_XORI:begin
                     RegWriteD <= 1'b1;
@@ -778,6 +831,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0; 
+                    isDivD <= 2'b00;
                 end 
                          
                 `OP_SLTI:begin
@@ -798,6 +852,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 
                 `OP_SLTIU:begin
@@ -818,6 +873,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_BEQ:begin
                     RegWriteD <= 1'b0;
@@ -837,6 +893,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_BNE:begin
                     RegWriteD <= 1'b0;
@@ -856,6 +913,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_BGTZ:begin
                     RegWriteD <= 1'b0;
@@ -875,6 +933,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_BLEZ:begin
                     RegWriteD <= 1'b0;
@@ -894,6 +953,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_J:begin
                     RegWriteD <= 1'b0;
@@ -913,6 +973,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b1;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
                 `OP_JAL:begin
                     RegWriteD <= 1'b1;
@@ -932,6 +993,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b1;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
 				//********************hjw*************************//
 				`OP_LUI:begin   //hjw
@@ -952,6 +1014,7 @@ module control_unit(
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
+                    isDivD <= 2'b00;
                 end
              `OP_LB:begin
                 RegWriteD <= 1'b1;
@@ -971,6 +1034,7 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
+                isDivD <= 2'b00;
            end
            `OP_LBU:begin
                 RegWriteD <= 1'b1;
@@ -990,6 +1054,7 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
+                isDivD <= 2'b00;
           end
           `OP_LH:begin
                 RegWriteD <= 1'b1;
@@ -1009,6 +1074,7 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
+                isDivD <= 2'b00;
              
          end
          `OP_LHU:begin
@@ -1029,7 +1095,7 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
          end
          `OP_LW:begin
                 RegWriteD <= 1'b1;
@@ -1049,7 +1115,7 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end
         `OP_LWL:begin
                 RegWriteD <= 1'b1;
@@ -1069,8 +1135,8 @@ module control_unit(
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
-end
+                isDivD <= 2'b00;
+        end
         `OP_LWR:begin
                 RegWriteD <= 1'b1;
                 MemtoRegD <= 1'b1;
@@ -1089,7 +1155,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end
         `OP_SB:begin
                 RegWriteD <= 1'b0;
@@ -1109,7 +1175,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end
         `OP_SH:begin
                 RegWriteD <= 1'b0;
@@ -1129,7 +1195,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end
         `OP_SW:begin
                 RegWriteD <= 1'b0;
@@ -1149,7 +1215,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end               
         `OP_SWL:begin
                 RegWriteD <= 1'b0;
@@ -1169,7 +1235,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end 
         `OP_SWR:begin
                 RegWriteD <= 1'b0;
@@ -1189,7 +1255,7 @@ end
                 HilotoRegD <=1'b0;
                 J_Imi_ControlD <= 1'b0;
                 J_Rs_ControlD <= 1'b0;
-
+                isDivD <= 2'b00;
         end                            
  
  
@@ -1212,7 +1278,7 @@ end
                     HilotoRegD <=1'b0;
                     J_Imi_ControlD <= 1'b0;
                     J_Rs_ControlD <= 1'b0;
-
+                    isDivD <= 2'b00;
                 end
             endcase
         end
@@ -1234,6 +1300,7 @@ end
             HilotoRegD <=1'b0;
             J_Imi_ControlD <= 1'b0;
             J_Rs_ControlD <= 1'b0;
+            isDivD <= 2'b00;
         end
 
     end

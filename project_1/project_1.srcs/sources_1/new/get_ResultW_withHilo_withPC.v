@@ -31,9 +31,12 @@ module get_ResultW_withHilo_withPC(
     input [`DATALENGTH] ResultW_withHilo,
     input [`PCSIZE] PCPlus8W,
     
-    output reg[`DATALENGTH] ResultW_withHilo_withPC
+    output [`DATALENGTH] ResultW_withHilo_withPC
     );
-    
+    assign ResultW_withHilo_withPC = (reset == `RESETABLE) ? `ZEROWORD:
+                                        (PCtoRegW == 1'b1)?PCPlus8W:
+                                        ResultW_withHilo;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             ResultW_withHilo_withPC <= `ZEROWORD;
@@ -45,4 +48,5 @@ module get_ResultW_withHilo_withPC(
             end
         end
     end
+    */
 endmodule

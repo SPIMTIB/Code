@@ -51,16 +51,16 @@ module hazard_unit(
         input [`R_SIZE] RtD,  
     
    // output 
-   output reg[1:0] ForwardAE,
-   output reg[1:0] ForwardBE,
+   output [1:0] ForwardAE,
+   output [1:0] ForwardBE,
    
-   output reg[1:0] ForwardAD,
-   output reg[1:0] ForwardBD,
+   output [1:0] ForwardAD,
+   output [1:0] ForwardBD,
    
-   output reg FlushE,
+   output  FlushE,
    
-   output reg StallD,
-   output reg StallF
+   output  StallD,
+   output  StallF
     );
     
     //reg control;
@@ -72,9 +72,29 @@ module hazard_unit(
     wire branchstall;
     assign branchstall = ((BranchD) && (RegWriteE) && ((WriteRegE == RsD) || (WriteRegE == RtD)) && WriteRegE != 0)
                       || ((BranchD) && (MemtoRegM) && ((WriteRegM == RsD) || (WriteRegM == RtD)) && WriteRegM != 0);
-   // wire hilostall;
-   // assign hilostall = (HilotoRegE) && (RegWriteE) && (WriteRegE == RsD);       // 5.6
+
+    assign StallF = (reset == `RESETABLE) ? 1'b0:(lwstall || branchstall);
+    assign StallD = (reset == `RESETABLE) ? 1'b0:(lwstall || branchstall);
+    assign FlushE = (reset == `RESETABLE) ? 1'b0:(lwstall || branchstall);
     
+    assign ForwardAD = (reset == `RESETABLE) ? 1'b0:
+                        ((RsD != 5'b00000) && (RsD == WriteRegM) && (RegWriteM == 1'b1)) ? 1'b1:
+                        1'b0;
+    assign ForwardBD = (reset == `RESETABLE) ? 1'b0:
+                    ((RtD != 5'b00000) && (RtD == WriteRegM) && (RegWriteM == 1'b1)) ? 1'b1:
+                    1'b0;
+    
+    
+    assign ForwardAE = (reset == `RESETABLE) ? 2'b00:
+                    ((RsE != 5'b00000) &&( RsE == WriteRegM) && (RegWriteM == 1'b1)) ? 2'b10:
+                    ((RsE != 5'b00000) &&( RsE == WriteRegW) && (RegWriteW == 1'b1)) ? 2'b01:
+                    2'b00;
+    assign ForwardBE = (reset == `RESETABLE) ? 2'b00:
+                    ((RtE != 5'b00000) &&( RtE == WriteRegM) && (RegWriteM == 1'b1)) ? 2'b10:
+                    ((RtE != 5'b00000) &&( RtE == WriteRegW) && (RegWriteW == 1'b1)) ? 2'b01:
+                    2'b00;
+                    
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             ForwardAE <= 2'b00;
@@ -123,5 +143,5 @@ module hazard_unit(
             end
         end
     end
-    
+    */
 endmodule

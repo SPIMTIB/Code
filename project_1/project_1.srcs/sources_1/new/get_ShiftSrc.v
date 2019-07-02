@@ -32,9 +32,12 @@ module get_ShiftSrc(
     input [`DATALENGTH] SignImmE,
     
     // output
-    output reg[`R_SIZE] ShiftsE
+    output [`R_SIZE] ShiftsE
     );
-    
+    assign ShiftsE = (reset == `RESETABLE) ? 5'b00000:
+                       (ShiftSrcE == 1'b0) ? SrcAE[4:0]:
+                        SignImmE[10:6];
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             ShiftsE <= 5'b00000;
@@ -50,4 +53,5 @@ module get_ShiftSrc(
             endcase
         end
     end
+    */
 endmodule

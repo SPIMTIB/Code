@@ -33,10 +33,15 @@ module get_SrcAE(
     input [`DATALENGTH] ALUOutM,
 
     // output
-    output reg [`DATALENGTH]SrcAE
+    output [`DATALENGTH]SrcAE
   
     );
-    
+    assign SrcAE = (reset == `RESETABLE) ? `ZEROWORD :
+                    (ForwardAE == 2'b00) ? RD1E    :
+                    (ForwardAE == 2'b01) ? ResultW :
+                    (ForwardAE == 2'b10) ? ALUOutM :
+                    `ZEROWORD;
+     /*       
     always@(*)begin
         if(reset == `RESETABLE)begin
             SrcAE <= `ZEROWORD;
@@ -58,4 +63,5 @@ module get_SrcAE(
             endcase
         end
     end
+    */
 endmodule

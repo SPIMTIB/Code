@@ -137,6 +137,21 @@ module defines();
 `define ALU_SLL 5'b01111	//hjw
 `define ALU_SRA 5'b10000	//hjw
 `define ALU_SRL 5'b10001	//hjw
+
+// access memory instrument control signal
+`define MEM_LB 4'b0001
+`define MEM_LBU 4'b0010
+`define MEM_LH 4'b0011
+`define MEM_LHU 4'b0100
+`define MEM_LW 4'b0101
+`define MEM_LWL 4'b0110
+`define MEM_LWR 4'b0111
+`define MEM_SB 4'b1000
+`define MEM_SH 4'b1001
+`define MEM_SW 4'b1010
+`define MEM_SWL 4'b1011
+`define MEM_SWR 4'b1100
+
 `define ZeroWord 32'h00000000
 
 // ALU code over

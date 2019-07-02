@@ -32,8 +32,12 @@ module SrcAE_SrcBE_ALU(
     input [`DATALENGTH] SrcBE,
     
 
-    output reg[`DATALENGTH]ALUOutE
+    output reg[`DATALENGTH]ALUOutE,
     
+    // for hilo
+    output reg[`DATALENGTH] ALUOutHighE
+ //   output [`DATALENGTH] hi,      
+  //  output [`DATALENGTH] lo        
     
     );
     
@@ -42,11 +46,22 @@ module SrcAE_SrcBE_ALU(
     
     wire [32:0] tmp_sub;         // for tmp result
     assign tmp_sub = {SrcAE[31],SrcAE} - {SrcBE[31],SrcBE};     // to be done
+   
+    wire [63:0]mul_result;
+    wire if_sig;
+    wire [`DATALENGTH] mul_data_1;
+    wire [`DATALENGTH] mul_data_2;
+    
+    assign if_sig = (ALUControlE == `ALU_MUL)?1'b1:1'b0;
+    assign mul_data_1 = (if_sig && SrcAE[31] == 1'b1)?(~SrcAE+1'b1):SrcAE;
+    assign mul_data_2 = (if_sig && SrcBE[31] == 1'b1)?(~SrcBE+1'b1):SrcBE;
+    assign mul_result = (SrcAE[31] ^ SrcBE[31] == 1'b1)?(~(mul_data_1 * mul_data_2)+1'b1):(mul_data_1 * mul_data_2);
     
     
     always@(*)begin
         if(reset == `RESETABLE)begin
             ALUOutE <= `ZEROWORD;
+            ALUOutHighE <= `ZEROWORD;
         end 
         else begin
             case(ALUControlE)
@@ -118,6 +133,16 @@ module SrcAE_SrcBE_ALU(
                 end
 				`ALU_NONE:begin    //hjw
                     ALUOutE <= SrcBE;
+                end
+                `ALU_MUL,`ALU_MULU:begin
+                    ALUOutHighE <= mul_result[63:32];
+                    ALUOutE <= mul_result[31:0];
+                end
+                `ALU_MTHI:begin
+                    ALUOutHighE <= SrcAE;
+                end
+                `ALU_MTLO:begin
+                    ALUOutE <= SrcAE;
                 end
                 default:begin
                     ALUOutE <= `ZEROWORD;

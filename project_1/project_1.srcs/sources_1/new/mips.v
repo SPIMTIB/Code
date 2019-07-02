@@ -74,6 +74,10 @@ module mips(
     wire HilotoRegD;
     wire PCtoRegD;      // **added for PC
     
+    wire [1:0] isDivD;
+    wire [1:0] isDivE;
+     
+    
     wire EqualD;
     wire [`OP_SIZE]opcode_out_opcodeD;
     
@@ -130,7 +134,7 @@ module mips(
     wire [1:0]ForwardBE;
     
     wire [`DATALENGTH] ALUOutE;
-    
+    wire [`DATALENGTH] ALUOutHighE;
     wire RegWriteM;
     wire MemtoRegM;
     wire MemWriteM;
@@ -206,6 +210,9 @@ module mips(
     /* below is part2 : decode*/
     //decode 
     decode decode0(.clock(clock),.reset(reset),.InstrD(InstrD),.instrIndex(instrIndex),.rs(rs),.rt(rt),.rd(rd),.im(im),.opcode(opcode),.funccode(funccode));
+    wire [3:0] MemCtrlD;
+    wire [3:0] MemCtrlE;
+    wire [3:0] MemCtrlM;
     // control_unit
     control_unit control_unit0(
     .clock(clock),
@@ -232,7 +239,9 @@ module mips(
     .HiReadD(HiReadD),
     .LoReadD(LoReadD),
     .HilotoRegD(HilotoRegD),
-    .opcode_out(opcode_out_opcodeD)
+    .isDivD(isDivD),
+    .MemCtrlD(MemCtrlD)
+    //.opcode_out(opcode_out_opcodeD)
     );
     // getRdD
     getRdD getRdD0(.clock(clock),.reset(reset),.RdD_31_Control(RdD_31_Control),.rd(rd),.RdD(RdD));
@@ -282,7 +291,9 @@ module mips(
     .RdD(RdD),
     .SignImmD(SignImmD),
     .PCPlus8D(PCPlus8D),
-    .opcodeD(opcode_out_opcodeD),
+    .isDivD(isDivD),
+    .MemCtrlD(MemCtrlD),
+    //.opcodeD(opcode_out_opcodeD),
     .RegWriteE(RegWriteE),
     .MemtoRegE(MemtoRegE),
     .MemWriteE(MemWriteE),
@@ -303,7 +314,9 @@ module mips(
     .RtE(RtE),
     .RdE(RdE),
     .SignImmE(SignImmE),
-    .opcodeE(opcodeE)
+    .isDivE(isDivE),
+    .MemCtrlE(MemCtrlE)
+    //.opcodeE(opcodeE)
     );
     
     /* below is part3 : exe*/
@@ -320,18 +333,29 @@ module mips(
     // mul_div_choose
 
 
-    mul_div_choose mul_div_choose0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),
-    .SrcAE(SrcAE),.div_start(div_start),.div_end(div_end),.div_hi_data(div_hi),.div_lo_data(div_lo),.mul_hi_data(mul_hi),.mul_lo_data(mul_lo),.status(status),.write_hi_dataE(write_hi_dataE),.write_lo_dataE(write_lo_dataE));
+   // mul_div_choose mul_div_choose0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),
+  //  .SrcAE(SrcAE),.div_start(div_start),.div_end(div_end),.div_hi_data(div_hi),.div_lo_data(div_lo),.mul_hi_data(mul_hi),.mul_lo_data(mul_lo),.status(status),.write_hi_dataE(write_hi_dataE),.write_lo_dataE(write_lo_dataE));
     // mul
 
-    mul mul0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),.SrcAE(SrcAE),.SrcBE(SrcBE),.mul_hi(mul_hi),.mul_lo(mul_lo));
-    //div
-   // div div0(.clock(clock),.reset(reset),.ifSig(1'b0),.status(status),.SrcAE(SrcAE),.SrcBE(SrcBE),.div_hi(div_hi),.div_lo(div_lo),.div_start(div_start),.div_end(div_end));
-    
+   // mul mul0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),.SrcAE(SrcAE),.SrcBE(SrcBE),.mul_hi(mul_hi),.mul_lo(mul_lo));
+   
     
     // SrcAE_SrcBE_ALU
-    SrcAE_SrcBE_ALU SrcAE_SrcBE_ALU0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),.ShiftsE(ShiftsE),.SrcAE(SrcAE),.SrcBE(SrcBE),.ALUOutE(ALUOutE));	//hjw
+    SrcAE_SrcBE_ALU SrcAE_SrcBE_ALU0(.clock(clock),.reset(reset),.ALUControlE(ALUControlE),.ShiftsE(ShiftsE),.SrcAE(SrcAE),.SrcBE(SrcBE),.ALUOutE(ALUOutE),.ALUOutHighE(ALUOutHighE));	//hjw
     
+            // input
+   
+   wire [`DATALENGTH] HighE;
+   wire [`DATALENGTH] LowE;
+   
+   wire [`DATALENGTH] HighM;
+   wire [`DATALENGTH] LowM;
+   wire divBusy;
+    //div
+    div div0(.clock(clock),.reset(reset),.isDiv(isDivE),.SrcAE(SrcAE),.SrcBE(SrcBE),.div_hi(div_hi),.div_lo(div_lo),.busy(divBusy));
+    
+    // ALUOut
+    ALUOut_Div_Choose ALUOut_Div_Choose0(.isDiv(isDivE[1]^isDivE[0]),.ALUOutHigh(ALUOutHighE),.ALUOutLow(ALUOutE),.DivHigh(div_hi),.DivLow(div_lo),.High(HighE),.Low(LowE));
     /* exe part is over*/
 
     // exe_accessMem
@@ -347,17 +371,20 @@ module mips(
     .LoReadE(LoReadE),
     .HilotoRegE(HilotoRegE),
     .PCtoRegE(PCtoRegE),
-    .ALUOutE(ALUOutE),
+ //   .ALUOutE(ALUOutE),
     .WriteDataE(WriteDataE),
     .WriteRegE(WriteRegE),
-    .write_hi_dataE(write_hi_dataE),
-    .write_lo_dataE(write_lo_dataE),
+ //   .write_hi_dataE(write_hi_dataE),
+  //  .write_lo_dataE(write_lo_dataE),
+    .HighE(HighE),
+    .LowE(LowE),
     .PCPlus8E(PCPlus8E),
-    .opcodeE(opcodeE),
+    .MemCtrlE(MemCtrlE),
+    //.opcodeE(opcodeE),
     .RegWriteM(RegWriteM),
     .MemtoRegM(MemtoRegM),
     .MemWriteM(MemWriteM),
-    .ALUOutM(ALUOutM),
+  //  .ALUOutM(ALUOutM),
     .WriteDataM(WriteDataM),
     .WriteRegM(WriteRegM),
     .HiWriteM(HiWriteM),
@@ -367,9 +394,12 @@ module mips(
     .HilotoRegM(HilotoRegM),
     .PCtoRegM(PCtoRegM),
     .PCPlus8M(PCPlus8M),
-    .write_hi_dataM(write_hi_dataM),
-    .write_lo_dataM(write_lo_dataM),
-    .opcodeM(opcodeM)
+  //  .write_hi_dataM(write_hi_dataM),
+  //  .write_lo_dataM(write_lo_dataM),
+    .HighM(HighM),
+    .LowM(LowM),
+    .MemCtrlM(MemCtrlM)
+    //.opcodeM(opcodeM)
     );
     
     /* below is part4 : access memory*/
@@ -378,9 +408,10 @@ module mips(
     access_mem access_mem0(
     .clock(clock),
     .reset(reset),
-    .opcodeM(opcodeM),
+    //.opcodeM(opcodeM),
     .MemWriteM(MemWriteM),
-    .addr(ALUOutM),
+    .MemCtrlM(MemCtrlM),
+    .addr(LowM),        // 7-1 **
     .writeData(WriteDataM),
     .mem_data_i(ram_data_i),
     .mem_addr_o(ram_addr_o),
@@ -393,17 +424,17 @@ module mips(
     
     );
      // hilo   *******************
-    hilo hilo0(.clock(clock),.reset(reset),.writeHi(HiWriteM),.writeLo(LoWriteM),.readHi(HiReadM),.readLo(LoReadM),.hi_data_in(write_hi_dataM),.lo_data_in(write_lo_dataM),.hilo_data_out(hilo_data_out));
+    hilo hilo0(.clock(clock),.reset(reset),.writeHi(HiWriteM),.writeLo(LoWriteM),.readHi(HiReadM),.readLo(LoReadM),.hi_data_in(HighM),.lo_data_in(LowM),.hilo_data_out(hilo_data_out));
      // M_E_databack
 
-    M_E_databack M_E_databack0(.reset(reset),.HilotoRegM(HilotoRegM),.PCtoRegM(PCtoRegM),.ALUOutM(ALUOutM),.hilo_data_out(hilo_data_out),.PCPlus8M(PCPlus8M),.ME_databack(ME_databack));
+    M_E_databack M_E_databack0(.reset(reset),.HilotoRegM(HilotoRegM),.PCtoRegM(PCtoRegM),.ALUOutM(LowM),.hilo_data_out(hilo_data_out),.PCPlus8M(PCPlus8M),.ME_databack(ME_databack));
 
     /* access memory part is over*/
     
     // accessMem_writeback
     wire [`DATALENGTH] HiloDataW;
     accessMem_writeback accessMem_writeback0(.clock(clock),.reset(reset),.RegWriteM(RegWriteM),.MemtoRegM(MemtoRegM),.HilotoRegM(HilotoRegM),
-    .PCtoRegM(PCtoRegM),.ReadDataM(ReadDataM),.ALUOutM(ALUOutM),.WriteRegM(WriteRegM),.HiloDataM(hilo_data_out),
+    .PCtoRegM(PCtoRegM),.ReadDataM(ReadDataM),.ALUOutM(LowM),.WriteRegM(WriteRegM),.HiloDataM(hilo_data_out),
     .PCPlus8M(PCPlus8M),.RegWriteW(RegWriteW),.MemtoRegW(MemtoRegW),.HilotoRegW(HilotoRegW),
     .PCtoRegW(PCtoRegW),.PCPlus8W(PCPlus8W),.ReadDataW(ReadDataW),.ALUOutW(ALUOutW),.WriteRegW(WriteRegW),
     .HiloDataW(HiloDataW));

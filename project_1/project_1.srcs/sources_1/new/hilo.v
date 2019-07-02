@@ -34,11 +34,15 @@ module hilo(
     input [`DATALENGTH] hi_data_in,
     input [`DATALENGTH] lo_data_in,
     
-    output reg[`DATALENGTH] hilo_data_out
+    output [`DATALENGTH] hilo_data_out
     );
     
     reg [`DATALENGTH] hi;
     reg [`DATALENGTH] lo;
+    
+    assign hilo_data_out = (reset == `RESETABLE) ? `ZEROWORD:
+                            (readHi == 1'b1) ? hi:
+                            lo;
     
     always @ (posedge clock)begin
         if(reset == `RESETUNABLE) begin
@@ -50,6 +54,7 @@ module hilo(
             end
         end
     end
+    /*
     always @ (*)begin
         if(reset == `RESETABLE)begin
             hilo_data_out <= `ZEROWORD;
@@ -62,6 +67,7 @@ module hilo(
         end
         
     end
+    */
    // assign hilo_data_out = {(writeHi == 1'b1) ? hi_data_in:hi,(writeLo == 1'b1) ? lo_data_in:lo};
     
 endmodule

@@ -9,20 +9,27 @@ module decode(
     input wire[`INSTRSIZE] InstrD,
     
     // output
-    output reg[`INSTR_INDEX]instrIndex,
+    output [`INSTR_INDEX]instrIndex,
     
-    output reg[`R_SIZE] rs,
-    output reg[`R_SIZE] rt,
-    output reg[`R_SIZE] rd,
+    output [`R_SIZE] rs,
+    output [`R_SIZE] rt,
+    output [`R_SIZE] rd,
     
-    output reg[`IMI_SIZE] im,
+    output [`IMI_SIZE] im,
     
-    output reg[`OP_SIZE] opcode,
-    output reg[`OP_SIZE] funccode
+    output [`OP_SIZE] opcode,
+    output [`OP_SIZE] funccode
     );
     
     
-    
+    assign instrIndex = (reset == `RESETUNABLE)?InstrD[25:0]:26'b0;
+    assign rs = (reset == `RESETUNABLE)?InstrD[25:21]:5'b0;
+    assign rt = (reset == `RESETUNABLE)?InstrD[20:16]:5'b0;
+    assign rd = (reset == `RESETUNABLE)?InstrD[15:11]:5'b0;
+    assign im = (reset == `RESETUNABLE)?InstrD[15:0]:15'b0;
+    assign opcode = (reset == `RESETUNABLE)?InstrD[31:26]:6'b0;
+    assign funccode = (reset == `RESETUNABLE)?InstrD[5:0]:6'b0;
+    /*
     always @ (*) begin
         if(reset == `RESETUNABLE) begin
             opcode <= InstrD[31:26];
@@ -42,6 +49,6 @@ module decode(
             instrIndex <= 26'b0;
         end
     end
-    
+    */
     
 endmodule

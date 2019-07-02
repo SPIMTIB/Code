@@ -37,16 +37,15 @@ module getEqualD(
     
     // output
     output [`DATALENGTH] realRD1,
-    output reg[`DATALENGTH] RD1_out,
-    output reg[`DATALENGTH] RD2_out,
-    output reg EqualD
+    output [`DATALENGTH] RD1_out,
+    output [`DATALENGTH] RD2_out,
+    output  EqualD
     );
     wire [`ADDRLENGTH] choose_1;
     wire [`ADDRLENGTH] choose_2;
     assign choose_1 = (ForwardAD == 1'b1)? ALUOutM : RD1;
     assign choose_2 = (ForwardBD == 1'b1)? ALUOutM : RD2;
     assign realRD1 = choose_1;
-    
     wire result;
     assign result = (EqualDControl == `EQC_NONE)? 0 
                     :(EqualDControl == `EQC_EQUAL && choose_1 == choose_2)? 1 
@@ -57,6 +56,10 @@ module getEqualD(
                     :(EqualDControl == `EQC_LOW && choose_1[31] == 1'b1)? 1
                     :(EqualDControl == `EQC_J)? 1
                     :0;
+    assign EqualD = (reset == `RESETABLE) ? 1'b0 : result;
+    assign RD1_out = (reset == `RESETABLE) ? `ZEROWORD : RD1;
+    assign RD2_out = (reset == `RESETABLE) ? `ZEROWORD : RD2;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             RD1_out <= `ZEROWORD;
@@ -68,4 +71,5 @@ module getEqualD(
             EqualD <= result;
         end
     end
+    */
 endmodule

@@ -32,10 +32,13 @@ module get_SrcBE(
     input [`DATALENGTH] SignImmE,
 
     // output
-    output reg [`DATALENGTH]SrcBE
+    output [`DATALENGTH]SrcBE
   
     );
-    
+    assign SrcBE = (reset == `RESETABLE) ? `ZEROWORD : 
+                    (ALUSrcE == 1'b0) ? WriteDataE :
+                    SignImmE;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             SrcBE <= `ZEROWORD;
@@ -51,4 +54,5 @@ module get_SrcBE(
             endcase
         end
     end
+    */
 endmodule

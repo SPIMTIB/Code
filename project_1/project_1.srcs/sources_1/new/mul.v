@@ -28,8 +28,8 @@ module mul(
     input [`DATALENGTH]SrcAE,
     input [`DATALENGTH]SrcBE,
     
-    output reg[`DATALENGTH] mul_hi,        // for mul
-    output reg[`DATALENGTH] mul_lo        // for mul
+    output [`DATALENGTH] mul_hi,        // for mul
+    output [`DATALENGTH] mul_lo        // for mul
     );
     
     wire [63:0]mul_result;
@@ -41,6 +41,10 @@ module mul(
     assign mul_data_1 = (if_sig && SrcAE[31] == 1'b1)?(~SrcAE+1'b1):SrcAE;
     assign mul_data_2 = (if_sig && SrcBE[31] == 1'b1)?(~SrcBE+1'b1):SrcBE;
     assign mul_result = (SrcAE[31] ^ SrcBE[31] == 1'b1)?(~(mul_data_1 * mul_data_2)+1'b1):(mul_data_1 * mul_data_2);
+    
+    assign mul_hi = (reset == `RESETABLE) ?`ZEROWORD :mul_result[63:32];
+    assign mul_lo = (reset == `RESETABLE) ?`ZEROWORD :mul_result[31:0];
+    /*
     always @ (*) begin
         if(reset == `RESETABLE)begin
             mul_hi <= `ZEROWORD;
@@ -51,4 +55,5 @@ module mul(
             mul_lo <= mul_result[31:0];              
         end
     end
+    */
 endmodule

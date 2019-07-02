@@ -28,9 +28,11 @@ module get_PCSrcD(
     input BranchD,
     
     // output signal
-    output reg PCSrcD
+    output  PCSrcD
     );
-    
+    assign PCSrcD = (reset == `RESETABLE) ? 1'b0 : 
+                    (EqualD & BranchD);
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             PCSrcD <= 1'b0;
@@ -38,4 +40,5 @@ module get_PCSrcD(
             PCSrcD <= EqualD & BranchD;
         end
     end
+    */
 endmodule

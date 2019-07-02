@@ -32,9 +32,12 @@ module get_WriteRegE(
     input [`R_SIZE] RdE,
     
     // output
-    output reg[`R_SIZE] WriteRegE
+    output [`R_SIZE] WriteRegE
     );
     
+    assign WriteRegE = (reset == `RESETABLE)? 5'b00000 :
+                        (RegDstE == 1'b0)?RtE:RdE;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             WriteRegE <= 5'b00000;
@@ -50,4 +53,5 @@ module get_WriteRegE(
             endcase
         end
     end
+    */
 endmodule

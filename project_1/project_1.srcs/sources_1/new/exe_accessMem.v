@@ -33,27 +33,27 @@ module exe_accessMem(
     input HiReadE,
     input LoReadE,
     input HilotoRegE,
-    
-    
     input PCtoRegE,         // ** added for PC
     
     // input
-    input [`DATALENGTH]ALUOutE,
+   // input [`DATALENGTH]ALUOutE,
     input [`DATALENGTH]WriteDataE,
     input [`R_SIZE] WriteRegE,
     
 
-    input [`DATALENGTH]write_hi_dataE,
-    input [`DATALENGTH]write_lo_dataE,
+    input [`DATALENGTH]HighE,
+    input [`DATALENGTH]LowE,
     
     input [`PCSIZE] PCPlus8E, // ** added for PC
-    input [`OP_SIZE] opcodeE,
+    
+    input [3:0]MemCtrlE,
+    //input [`OP_SIZE] opcodeE,
     // output 
     output reg RegWriteM,
     output reg MemtoRegM,
     output reg MemWriteM,
     
-    output reg[`DATALENGTH]ALUOutM,
+ //   output reg[`DATALENGTH]ALUOutM,
     output reg[`DATALENGTH]WriteDataM,
     output reg[`R_SIZE] WriteRegM,
     
@@ -68,9 +68,11 @@ module exe_accessMem(
     output reg [`PCSIZE] PCPlus8M,// ** added for PC
     
     
-    output reg[`DATALENGTH] write_hi_dataM,
-    output reg[`DATALENGTH] write_lo_dataM,
-    output reg[`OP_SIZE] opcodeM
+    output reg[`DATALENGTH] HighM,
+    output reg[`DATALENGTH] LowM,
+    
+    output reg [3:0]MemCtrlM
+    //output reg[`OP_SIZE] opcodeM
     );
     
     always @(posedge clock)begin
@@ -78,7 +80,7 @@ module exe_accessMem(
             RegWriteM <= 1'b0;
             MemtoRegM <= 1'b0;
             MemWriteM <= 1'b0;
-            ALUOutM <= `ZEROWORD;
+         //   ALUOutM <= `ZEROWORD;
             WriteDataM <= `ZEROWORD;
             WriteRegM <= 5'b00000;
             HiWriteM <= 1'b0;
@@ -86,17 +88,18 @@ module exe_accessMem(
             HiReadM <= 1'b0;
             LoReadM <= 1'b0;
             HilotoRegM <= 1'b0;
-            write_hi_dataM <= `ZEROWORD;
-            write_lo_dataM <= `ZEROWORD;
+            HighM <= `ZEROWORD;
+            LowM <= `ZEROWORD;
             PCtoRegM <= 1'b0;
             PCPlus8M <= `ZEROWORD;
-            opcodeM <= 6'b000000;
+            MemCtrlM <= 4'b0000;
+            //opcodeM <= 6'b000000;
         end
         else begin
             RegWriteM <= RegWriteE;
             MemtoRegM <= MemtoRegE;
             MemWriteM <= MemWriteE;
-            ALUOutM <= ALUOutE;
+       //     ALUOutM <= ALUOutE;
             WriteDataM <= WriteDataE;
             WriteRegM <= WriteRegE;
 
@@ -105,11 +108,12 @@ module exe_accessMem(
             HiReadM <= HiReadE;
             LoReadM <= LoReadE;
             HilotoRegM <= HilotoRegE;
-            write_hi_dataM <= write_hi_dataE;
-            write_lo_dataM <= write_lo_dataE;
+            HighM <= HighE;
+            LowM <= LowE;
             PCtoRegM <= PCtoRegE;
             PCPlus8M <= PCPlus8E;
-            opcodeM <= opcodeE;
+            MemCtrlM <= MemCtrlE;
+            //opcodeM <= opcodeE;
         end
     end
 endmodule

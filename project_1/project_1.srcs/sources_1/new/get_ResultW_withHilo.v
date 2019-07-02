@@ -29,9 +29,13 @@ module get_ResultW_withHilo(
     input [`DATALENGTH] ResultW,
     input [`DATALENGTH] Hilodata,
     
-    output reg[`DATALENGTH] ResultW_withHilo
+    output [`DATALENGTH] ResultW_withHilo
     );
     
+    assign ResultW_withHilo = (reset == `RESETABLE) ? `ZEROWORD:
+                                (HilotoRegW == 1'b1)? Hilodata:
+                                ResultW;
+    /*
     always @(*)begin
         if(reset == `RESETABLE)begin
             ResultW_withHilo <= `ZEROWORD;
@@ -43,4 +47,5 @@ module get_ResultW_withHilo(
             end
         end
     end
+    */
 endmodule

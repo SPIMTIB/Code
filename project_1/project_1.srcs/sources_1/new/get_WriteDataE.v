@@ -33,9 +33,14 @@ module get_WriteDataE(
     input [`DATALENGTH] ALUOutM,
     
     // output
-    output reg[`DATALENGTH] WriteDataE
+    output [`DATALENGTH] WriteDataE
     );
-    
+    assign WriteDataE = (reset == `RESETABLE) ? `ZEROWORD :
+                        (ForwardBE == 2'b00) ? RD2E:
+                        (ForwardBE == 2'b01) ? ResultW:
+                        (ForwardBE == 2'b10) ? ALUOutM:
+                        `ZEROWORD;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             WriteDataE <= `ZEROWORD;
@@ -57,5 +62,5 @@ module get_WriteDataE(
             endcase
         end
     end
-    
+    */
 endmodule

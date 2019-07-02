@@ -31,7 +31,7 @@
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSAVendor" Val="xilinx"/>
     <Option Name="DSANumComputeUnits" Val="60"/>
-    <Option Name="WTXSimLaunchSim" Val="296"/>
+    <Option Name="WTXSimLaunchSim" Val="360"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -61,6 +61,13 @@
           <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/defines.vh"/>
           <Attr Name="ImportTime" Val="1557564901"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/ALUOUt_Div_Choose.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -138,6 +145,15 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/decode_exe.v"/>
           <Attr Name="ImportTime" Val="1557567805"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/div.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/div.v"/>
+          <Attr Name="ImportTime" Val="1557411897"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -341,24 +357,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/mul.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/mul.v"/>
-          <Attr Name="ImportTime" Val="1557412852"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/mul_div_choose.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/mul_div_choose.v"/>
-          <Attr Name="ImportTime" Val="1557412848"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/new/regfile.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/regfile.v"/>
@@ -393,11 +391,21 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/div.v">
+      <File Path="$PSRCDIR/sources_1/new/mul.v">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/div.v"/>
-          <Attr Name="ImportTime" Val="1557411897"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/mul.v"/>
+          <Attr Name="ImportTime" Val="1557412852"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/mul_div_choose.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Assembly_Line/Assembly_Line.srcs/sources_1/new/mul_div_choose.v"/>
+          <Attr Name="ImportTime" Val="1557412848"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

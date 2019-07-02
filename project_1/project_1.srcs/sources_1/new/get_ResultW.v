@@ -32,9 +32,13 @@ module get_ResultW(
     input [`DATALENGTH] ALUOutW,
     
     // output
-    output reg[`DATALENGTH] ResultW
+    output [`DATALENGTH] ResultW
     );
     
+    assign ResultW = (reset == `RESETABLE)?`ZEROWORD:
+                        (MemtoRegW == 1'b0) ? ALUOutW:
+                        ReadDataW;
+    /*
     always@(*)begin
         if(reset == `RESETABLE)begin
             ResultW <= `ZEROWORD;
@@ -50,4 +54,5 @@ module get_ResultW(
             endcase
         end
     end
+    */
 endmodule
