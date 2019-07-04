@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="873000000fs"></ZoomStartTime>
+      <ZoomEndTime time="1025400001fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="177"></NameColumnWidth>
+      <ValueColumnWidth column_width="73"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="24" />
+   <wvobject type="logic" fp_name="/testbench/CLOCK_50">
+      <obj_property name="ElementShortName">CLOCK_50</obj_property>
+      <obj_property name="ObjectShortName">CLOCK_50</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/testbench/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_instr0/InstrI">
+      <obj_property name="ElementShortName">InstrI[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InstrI[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/decode0/InstrD">
+      <obj_property name="ElementShortName">InstrD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InstrD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_instr0/instr_addr">
+      <obj_property name="ElementShortName">instr_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instr_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/ALUOutHighE">
+      <obj_property name="ElementShortName">ALUOutHighE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutHighE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/ALUOutE">
+      <obj_property name="ElementShortName">ALUOutE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/SrcAE">
+      <obj_property name="ElementShortName">SrcAE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SrcAE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/SrcBE">
+      <obj_property name="ElementShortName">SrcBE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SrcBE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/SrcAE_SrcBE_ALU0/ALUControlE">
+      <obj_property name="ElementShortName">ALUControlE[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUControlE[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_SrcAE0/ForwardAE">
+      <obj_property name="ElementShortName">ForwardAE[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ForwardAE[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_SrcAE0/RD1E">
+      <obj_property name="ElementShortName">RD1E[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RD1E[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_WriteDataE0/ForwardBE">
+      <obj_property name="ElementShortName">ForwardBE[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ForwardBE[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_WriteDataE0/RD2E">
+      <obj_property name="ElementShortName">RD2E[31:0]</obj_property>
+      <obj_property name="ObjectShortName">RD2E[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_SrcAE0/ResultW">
+      <obj_property name="ElementShortName">ResultW[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ResultW[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_SrcAE0/ALUOutM">
+      <obj_property name="ElementShortName">ALUOutM[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutM[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/get_ResultW_withHilo_withPC0/ResultW_withHilo_withPC">
+      <obj_property name="ElementShortName">ResultW_withHilo_withPC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ResultW_withHilo_withPC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/accessMem_writeback0/ReadDataW">
+      <obj_property name="ElementShortName">ReadDataW[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ReadDataW[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/accessMem_writeback0/ALUOutW">
+      <obj_property name="ElementShortName">ALUOutW[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutW[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/accessMem_writeback0/WriteRegW">
+      <obj_property name="ElementShortName">WriteRegW[4:0]</obj_property>
+      <obj_property name="ObjectShortName">WriteRegW[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/accessMem_writeback0/ReadDataM">
+      <obj_property name="ElementShortName">ReadDataM[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ReadDataM[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/accessMem_writeback0/ALUOutM">
+      <obj_property name="ElementShortName">ALUOutM[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUOutM[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/exe_accessMem0/HighE">
+      <obj_property name="ElementShortName">HighE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">HighE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/testbench/mips_sopc0/mips0/exe_accessMem0/LowE">
+      <obj_property name="ElementShortName">LowE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">LowE[31:0]</obj_property>
+   </wvobject>
+</wave_config>
