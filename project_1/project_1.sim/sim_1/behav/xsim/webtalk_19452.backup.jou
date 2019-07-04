@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:39:19 MDT 2018
+# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+# Start of session at: Mon May 27 22:31:22 2019
+# Process ID: 19452
+# Current directory: /home/qishen-zhen/Desktop/Assembly_line_plus_Orig _copy/project_1/project_1.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/qishen-zhen/Desktop/Assembly_line_plus_Orig _copy/project_1/project_1.sim/sim_1/behav/xsim/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/qishen-zhen/Desktop/Assembly_line_plus_Orig _copy/project_1/project_1.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/qishen-zhen/Desktop/Assembly_line_plus_Orig _copy/project_1/project_1.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/qishen-zhen/Desktop/Assembly_line_plus_Orig -notrace

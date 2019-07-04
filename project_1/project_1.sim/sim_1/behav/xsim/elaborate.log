@@ -1,0 +1,51 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: /home/forever/Vivado/Vivado2018_3/Vivado/2018.3/bin/unwrapped/lnx64.o/xelab -wto 0e10d47e512643e9a49f215edb64624b --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot testbench_behav xil_defaultlib.testbench xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+WARNING: [VRFC 10-3091] actual bit length 33 differs from formal bit length 32 for port 'mem_data_i' [/home/forever/Desktop/1/Assembly_line_plus3.0/project_1/project_1.srcs/sources_1/new/mips.v:416]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'ForwardAD' [/home/forever/Desktop/1/Assembly_line_plus3.0/project_1/project_1.srcs/sources_1/new/mips.v:458]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.get_pc
+Compiling module xil_defaultlib.PC_ALU
+Compiling module xil_defaultlib.get_instr
+Compiling module xil_defaultlib.instr_decode
+Compiling module xil_defaultlib.decode
+Compiling module xil_defaultlib.control_unit
+Compiling module xil_defaultlib.getRdD
+Compiling module xil_defaultlib.regfile
+Compiling module xil_defaultlib.getEqualD
+Compiling module xil_defaultlib.get_PCSrcD
+Compiling module xil_defaultlib.sig_extend
+Compiling module xil_defaultlib.shift_unit
+Compiling module xil_defaultlib.get_PCBranchD
+Compiling module xil_defaultlib.get_J_PCBranchD
+Compiling module xil_defaultlib.get_PCBranchD_final
+Compiling module xil_defaultlib.get_PCPLus8
+Compiling module xil_defaultlib.decode_exe
+Compiling module xil_defaultlib.get_WriteRegE
+Compiling module xil_defaultlib.get_SrcAE
+Compiling module xil_defaultlib.get_SrcBE
+Compiling module xil_defaultlib.get_ShiftSrc
+Compiling module xil_defaultlib.get_WriteDataE
+Compiling module xil_defaultlib.SrcAE_SrcBE_ALU
+Compiling module xil_defaultlib.div
+Compiling module xil_defaultlib.ALUOut_Div_Choose
+Compiling module xil_defaultlib.exe_accessMem
+Compiling module xil_defaultlib.access_mem
+Compiling module xil_defaultlib.hilo
+Compiling module xil_defaultlib.M_E_databack
+Compiling module xil_defaultlib.accessMem_writeback
+Compiling module xil_defaultlib.get_ResultW
+Compiling module xil_defaultlib.get_ResultW_withHilo
+Compiling module xil_defaultlib.get_ResultW_withHilo_withPC
+Compiling module xil_defaultlib.hazard_unit
+Compiling module xil_defaultlib.mips
+Compiling module xil_defaultlib.data_ram
+Compiling module xil_defaultlib.mips_sopc
+Compiling module xil_defaultlib.testbench
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot testbench_behav
