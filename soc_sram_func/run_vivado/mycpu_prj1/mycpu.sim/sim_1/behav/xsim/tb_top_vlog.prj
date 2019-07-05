@@ -1,0 +1,52 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../rtl/myCPU" --include "../../../../../../rtl/xilinx_ip/clk_pll" \
+"../../../../../../rtl/xilinx_ip/clk_pll/clk_pll_clk_wiz.v" \
+"../../../../../../rtl/xilinx_ip/clk_pll/clk_pll.v" \
+"../../../../../../rtl/xilinx_ip/data_ram/sim/data_ram.v" \
+"../../../../../../rtl/xilinx_ip/inst_ram/inst_ram_sim_netlist.v" \
+"../../../../../../rtl/myCPU/ALUOUt_Div_Choose.v" \
+"../../../../../../rtl/myCPU/M_E_databack.v" \
+"../../../../../../rtl/myCPU/PC_ALU.v" \
+"../../../../../../rtl/myCPU/SrcAE_SrcBE_ALU.v" \
+"../../../../../../rtl/myCPU/accessMem_writeback.v" \
+"../../../../../../rtl/myCPU/access_mem.v" \
+"../../../../../../rtl/BRIDGE/bridge_1x2.v" \
+"../../../../../../rtl/CONFREG/confreg.v" \
+"../../../../../../rtl/myCPU/control_unit.v" \
+"../../../../../../rtl/myCPU/decode.v" \
+"../../../../../../rtl/myCPU/decode_exe.v" \
+"../../../../../../rtl/myCPU/div.v" \
+"../../../../../../rtl/myCPU/exe_accessMem.v" \
+"../../../../../../rtl/myCPU/getEqualD.v" \
+"../../../../../../rtl/myCPU/getRdD.v" \
+"../../../../../../rtl/myCPU/get_J_PCBranchD.v" \
+"../../../../../../rtl/myCPU/get_PCBranchD.v" \
+"../../../../../../rtl/myCPU/get_PCBranchD_final.v" \
+"../../../../../../rtl/myCPU/get_PCPLus8.v" \
+"../../../../../../rtl/myCPU/get_PCSrcD.v" \
+"../../../../../../rtl/myCPU/get_ResultW.v" \
+"../../../../../../rtl/myCPU/get_ResultW_withHilo.v" \
+"../../../../../../rtl/myCPU/get_ResultW_withHilo_withPC.v" \
+"../../../../../../rtl/myCPU/get_ShiftSrc.v" \
+"../../../../../../rtl/myCPU/get_SrcAE.v" \
+"../../../../../../rtl/myCPU/get_SrcBE.v" \
+"../../../../../../rtl/myCPU/get_WriteDataE.v" \
+"../../../../../../rtl/myCPU/get_WriteRegE.v" \
+"../../../../../../rtl/myCPU/get_instr.v" \
+"../../../../../../rtl/myCPU/get_pc.v" \
+"../../../../../../rtl/myCPU/hazard_unit.v" \
+"../../../../../../rtl/myCPU/hilo.v" \
+"../../../../../../rtl/myCPU/instr_decode.v" \
+"../../../../../../rtl/myCPU/mips.v" \
+"../../../../mycpu.srcs/sources_1/new/mycpu_top.v" \
+"../../../../../../rtl/myCPU/regfile.v" \
+"../../../../../../rtl/myCPU/shift_unit.v" \
+"../../../../../../rtl/myCPU/sig_extend.v" \
+"../../../../../../rtl/soc_lite_top.v" \
+"../../../../../../testbench/mycpu_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
